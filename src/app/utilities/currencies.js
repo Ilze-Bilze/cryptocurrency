@@ -1,4 +1,5 @@
 const currencies = {
+  EUR: 'Euro',
   USD: 'United States Dollar',
   AUD: 'Australian Dollar',
   BGN: 'Bulgarian Lev',
@@ -30,7 +31,6 @@ const currencies = {
   THB: 'Thai Baht',
   TRY: 'Turkish Lira',
   ZAR: 'South African Rand',
-  EUR: 'Euro',
 };
 
 export default currencies;
