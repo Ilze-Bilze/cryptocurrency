@@ -8,7 +8,6 @@ function Form() {
   const fromInputRef = useRef(null)
   const toSelectRef = useRef(null)
   const toElRef = useRef(null)
-  const endpoint = 'https://api.coinbase.com/v2/exchange-rates?currency';
 
   useEffect(() => {
     const form = formRef.current
@@ -27,8 +26,8 @@ function Form() {
         .join('');
     }
 
-    async function fetchRates(base = 'EUR') {
-      const res = await fetch(`${endpoint}=${base}`);
+    async function fetchRates() {
+      const res = await fetch('https://api.coinbase.com/v2/exchange-rates?currency=EUR');
       const rates = await res.json();
       return rates;
     }
@@ -43,6 +42,7 @@ function Form() {
         // store them for next time
         ratesByBase[from] = rates;
         const rate = ratesByBase[from].rates[to];
+        
         const convertedAmount = rate * amount;
         console.log(`${amount} ${from} is ${convertedAmount} in ${to}`);
         return convertedAmount;
