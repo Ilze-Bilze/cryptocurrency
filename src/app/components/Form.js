@@ -1,5 +1,4 @@
 "use client"; // This is a client component 
-import ReactDOM from 'react-dom';
 import { useEffect, useRef, useState } from 'react'
 import currencies from "../utilities/currencies";
 
@@ -9,12 +8,14 @@ function Form() {
   const fromInputRef = useRef(null)
   const toSelectRef = useRef(null)
   const toElRef = useRef(null)
+  const endpoint = 'https://api.coinbase.com/v2/exchange-rates?currency';
 
   useEffect(() => {
+    const form = formRef.current
+    const fromInput = fromInputRef.current
     const fromSelect = fromSelectRef.current
     const toSelect = toSelectRef.current
-
-    const endpoint = 'https://api.coinbase.com/v2/exchange-rates?currency';
+    const toEl = toElRef.current
     const ratesByBase = {};
 
     function generateOptions(options) {
@@ -31,7 +32,6 @@ function Form() {
       const rates = await res.json();
       return rates;
     }
-  
     
     async function convert(amount, from, to) {
       // first check if we even have the rates to convert from that currency
@@ -42,7 +42,6 @@ function Form() {
         const rates = await fetchRates(from);
         // store them for next time
         ratesByBase[from] = rates;
-        // console.log(rates);
         const rate = ratesByBase[from].rates[to];
         const convertedAmount = rate * amount;
         console.log(`${amount} ${from} is ${convertedAmount} in ${to}`);
@@ -52,7 +51,7 @@ function Form() {
     }
   
     function formatCurrency(amount, currency) {
-      return Intl.NumberFormat('EUR', {
+      return Intl.NumberFormat('en-US', {
         style: 'currency',
         currency,
       }).format(amount);
@@ -60,21 +59,24 @@ function Form() {
     
     async function handleInput(e) {
       const rawAmount = await convert(
-        fromInputRef.current.value,
-        fromSelectRef.current.value,
-        toSelectRef.current.value,
+        fromInput.value,
+        fromSelect.value,
+        toSelect.value,
       );
       toEl.textContent = formatCurrency(rawAmount, toSelect.value);
     }
 
-    const optionsHTML = generateOptions(currencies);
-    // On page load, populate the options
-    fromSelect.innerHTML = optionsHTML;
-    toSelect.innerHTML = optionsHTML;
-
-    handleInput(); 
+      // when the page loads, this code runs!
+      const optionsHTML = generateOptions(currencies);
+      // populate the options elements
+      fromSelect.innerHTML = optionsHTML;
+      toSelect.innerHTML = optionsHTML;
+    
+      form.addEventListener('input', handleInput);
   }, [])
 
+  
+  
   return (
     <form className="border" ref={formRef}>
       <input type="number" name="from_amount" ref={fromInputRef} />
