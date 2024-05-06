@@ -17,9 +17,9 @@ function Header() {
       <header className="w-screen top-0" style={{ background: scroll ? "#fff" : "", zIndex: "999", padding: scroll ? "10px 0 10px 0" : "20px 0 20px 0", position: scroll ? "fixed" : "absolute" }}>
         <div className="relative flex flex-row justify-between item-center container m-auto">
           {/* Logo */}
-          <a className="text-[22px] font-bold text-white hover:text-main" href="/">
+          <a className="text-[22px] font-bold text-black hover:text-main" href="/">
           <span className="text-[#C2D6C1]">Crypto</span>Currency</a>
-          <div className="relative flex flex-row justify-between gap-x-5 border">
+          <div className="relative flex flex-row justify-between gap-x-5">
             <Flags />
           </div>
         </div>
