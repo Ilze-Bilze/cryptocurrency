@@ -33,7 +33,7 @@ const Item = styled.li`
   > ul {
     display: none;
     position: absolute;
-    top: 40px;
+    top: 38px;
     left: 0;
     width: 100%;
     background-color: white;
