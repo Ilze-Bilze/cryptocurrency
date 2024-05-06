@@ -27,8 +27,18 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+h1 {
+  font-size: calc(28px + (104 - 30) * ((100vw - 320px) / (1440 - 320)));
+  line-height: 1;
+  font-weight: 700;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.green-words {
+  color: #C2D6C1;
 }
