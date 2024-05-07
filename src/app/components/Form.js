@@ -13,12 +13,13 @@ function Form() {
   const toElRef = useRef(null)
   
   const fromSelect = fromSelectRef.current
+  const fromInput = fromInputRef.current
   const toSelect = toSelectRef.current
   const toEl = toElRef.current
 
   const handleInput = async (e) => {
     const rawAmount = await convert(
-      fromInputRef.value,
+      fromInput.value,
       fromSelect.value,
       toSelect.value,
     );
