@@ -4,43 +4,9 @@ import currencies from "../utilities/currencies"
 import Input from './Input'
 import Select from './Select'
 import { generateOptions, formatCurrency } from '../utilities/utils.js'
+import { convert } from '../utilities/convert'
 
-async function fetchRates() {
-  const res = await fetch('https://api.coinbase.com/v2/exchange-rates?currency=EUR');
-  const rates = await res.json();
-  return rates;
-}
 
-async function convert(amount, from, to) {
-  const ratesByBase = {};
-  // first check if we even have the rates to convert from that currency
-  if (!ratesByBase[from]) {
-    console.log(
-      `Oh, nooo! We don't have ${from} to convert ${to}. So let's go get it!`,
-    );
-    const rates = await fetchRates(from);
-    // store them for next time
-    ratesByBase[from] = rates;
-    const rate = ratesByBase[from].rates[to];
-    
-    const convertedAmount = rate * amount;
-    console.log(`${amount} ${from} is ${convertedAmount} in ${to}`);
-    return convertedAmount;
-  }
-  // Convert that amount that they past in
-}
-
-async function handleInput(e) {
-  // imitate delay
-  await new Promise(resolve => setTimeout(resolve, 3000))
-
-  const rawAmount = await convert(
-    fromInput.value,
-    fromSelect.value,
-    toSelect.value,
-  );
-  toEl.textContent = formatCurrency(rawAmount, toSelect.value);
-}
 
 function Form() {
   const formRef = useRef(null)
@@ -53,30 +19,54 @@ function Form() {
 
     const form = formRef.current
     const fromSelect = fromSelectRef.current
+    console.log(fromSelect)
+    const toSelect = toSelectRef.current
+    console.log(fromSelect)
     const toEl = toElRef.current
     
-
+    async function handleInput(e) {
+      // imitate delay
+      await new Promise(resolve => setTimeout(resolve, 3000))
+    
+      const rawAmount = await convert(
+        fromInputRef.value,
+        fromSelect.value,
+        toSelect.value,
+      );
+      toEl.textContent = formatCurrency(rawAmount, toSelect.value);
+    }
       // when the page loads, this code runs!
       const optionsHTML = generateOptions(currencies);
-      console.log(optionsHTML) // WORKING THIS FAR!
+      console.log(optionsHTML)
 
-
-      
-      console.log(fromInputRef)
+      if (fromSelect != null) {
+        fromSelect.innerHTML = optionsHTML;
+      }
       // populate the options elements
-      fromInputRef.innerHTML = optionsHTML;
-      toSelectRef.innerHTML = optionsHTML;
-      // form.addEventListener('input', handleInput);
+      // fromSelectRef.current.innerHTML = optionsHTML;
+      // crossOriginIsolated.log(fromSelectRef.current.innerHTML)
+      
+      if (toSelect != null) {
+        toSelect.innerHTML = optionsHTML;
+      }
+      // toSelectRef.current.innerHTML = optionsHTML;
+      console.log(toSelect)
+      //form.addEventListener('input', handleInput);
 
   return (
     <form className="border" ref={formRef}>
       <input type="number" name="from_amount" ref={fromInputRef} />
-      <Input ref={fromInputRef} />
       
-      <Select ref={fromSelectRef} text="text" />
+   
+      <select name="from_currency" ref={fromSelectRef.current}>
+      <option>Select a Currency</option>
+    </select>
       <p>in</p>
       
-      <Select ref={toSelectRef} text="text" />
+
+      <select name="to_currency" ref={toSelectRef.current}>
+      <option>Select a Currency</option>
+    </select>
       <p>is</p>
       <p className="to_amount" ref={toElRef}>$0</p>
     </form>
