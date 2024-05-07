@@ -9,8 +9,12 @@ export const useLayoutDirection = () => {
 
 export const LayoutDirectionProvider = ({ children }) => {
   const [isRTL, setIsRTL] = useState(() => {
-    const storedIsRTL = localStorage.getItem("isRTL");
-    return storedIsRTL === "true";
+    if (typeof localStorage !== 'undefined') {
+      const storedIsRTL = localStorage.getItem("isRTL")
+      return storedIsRTL === "true"
+    } else {
+      console.log('Web Storage is not supported in this environment.')
+    }
   });
 
   const toggleLayoutDirection = (boolean) => {
