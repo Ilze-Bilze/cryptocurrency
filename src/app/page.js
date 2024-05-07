@@ -7,7 +7,7 @@ import Intro from './components/Intro';
 import { useTranslation } from 'react-i18next';
 import Form from './components/Form';
 import { Suspense } from 'react';
-import variables from './variables.module.scss'
+import ToggleRTL from './components/ToggleRTL'
 
 export default function Home() {
   const { t } = useTranslation();
@@ -16,8 +16,10 @@ export default function Home() {
   return (
     <>
     <Header />
+    
     <main className="m-auto flex min-h-screen flex-col items-center justify-between p-24">
       <div className="w-full">
+        <ToggleRTL />
         <Intro title={t(about.header)} />
         <div className="">
           <Suspense fallback={<Loading />}>
