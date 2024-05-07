@@ -12,53 +12,39 @@ function Form() {
   const fromInputRef = useRef(null)
   const toSelectRef = useRef(null)
   const toElRef = useRef(null)
-
-  useEffect(() => {
-    // Using optional chaining operator
-    console.log(fromSelectRef.current?.innerHTML);
-  }, []);
   
-    const form = formRef.current
-    const fromSelect = fromSelectRef.current
-    console.log(fromSelect)
-    const toSelect = toSelectRef.current
-    console.log(fromSelect)
-    const toEl = toElRef.current
-    
-    async function handleInput(e) {
-      // imitate delay
-      await new Promise(resolve => setTimeout(resolve, 3000))
-    
-      const rawAmount = await convert(
-        fromInputRef.value,
-        fromSelect.value,
-        toSelect.value,
-      );
-      toEl.textContent = formatCurrency(rawAmount, toSelect.value);
-    }
-      // when the page loads, this code runs!
-      const optionsHTML = generateOptions(currencies)
+  const fromSelect = fromSelectRef.current
+  const toSelect = toSelectRef.current
+  const toEl = toElRef.current
 
-      if (fromSelect != null) {
-        fromSelect.innerHTML = optionsHTML;
-      }
+  const handleInput = async (e) => {
+    // imitate delay
+    await new Promise(resolve => setTimeout(resolve, 3000))
   
-      if (toSelect != null) {
-        toSelect.innerHTML = optionsHTML;
-      }
-      //form.addEventListener('input', handleInput);
+    const rawAmount = await convert(
+      fromInputRef.value,
+      fromSelect.value,
+      toSelect.value,
+    );
+    toEl.textContent = formatCurrency(rawAmount, toSelect.value);
+  }
+
+  // when the page loads, this code runs!
+  const optionsHTML = generateOptions(currencies)
+  if (fromSelect != null) {
+    fromSelect.innerHTML = optionsHTML;
+  }
+  if (toSelect != null) {
+    toSelect.innerHTML = optionsHTML;
+  }
 
   return (
-    <form className="border" ref={formRef}>
+    <form className="border" ref={formRef} onChange={handleInput}>
       <input type="number" name="from_amount" ref={fromInputRef} />
-      
-   
       <select name="from_currency" ref={fromSelectRef}>
         <option>Select a Currency</option>
       </select>
       <p>in</p>
-      
-
       <select name="to_currency" ref={toSelectRef}>
         <option>Select a Currency</option>
       </select>

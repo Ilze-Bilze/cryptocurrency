@@ -1,8 +1,7 @@
-const endpoint = 'https://api.vatcomply.com/rates';
 const ratesByBase = {};
 
-export async function fetchRates(base = 'USD') {
-  const res = await fetch(`${endpoint}?base=${base}`);
+export async function fetchRates() {
+  const res = await fetch('https://api.coinbase.com/v2/exchange-rates?currency=EUR');
   const rates = await res.json();
   return rates;
 }
@@ -14,7 +13,6 @@ export async function convert(amount, from, to) {
       `Oh no, we dont have ${from} to convert to ${to}. So gets go get it!`,
     );
     const rates = await fetchRates(from);
-    console.log(rates);
     // store them for next time
     ratesByBase[from] = rates;
   }

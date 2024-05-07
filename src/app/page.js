@@ -22,8 +22,8 @@ export default function Home() {
     <main className="m-auto flex min-h-screen flex-col items-center justify-between p-24">
       <div className="w-full">
         <ToggleRTL />
-        <Intro title={t(about.header)} />
         <Image src={adaIcon} alt="svg icon" width="50" height="50" />
+        <Intro title={t(about.header)} />
         <Suspense fallback={<Loading />}>
           <Form />
         </Suspense>
