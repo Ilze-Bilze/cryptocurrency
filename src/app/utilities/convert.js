@@ -1,9 +1,11 @@
 const ratesByBase = {};
 
-export async function fetchRates() {
+async function fetchRates() {
+  // imitate delay
+  await new Promise(resolve => setTimeout(resolve, 3000))
+  
   const res = await fetch('https://api.coinbase.com/v2/exchange-rates?currency=EUR');
-  const rates = await res.json();
-  return rates;
+  return res.json();
 }
 
 export async function convert(amount, from, to) {
