@@ -6,6 +6,7 @@ export function generateOptions(options) {
 }
 
 export function formatCurrency(amount, currency) {
+  console.log(currency.toLowerCase())
   return Intl.NumberFormat('en-US', {
     style: 'currency',
     currency,

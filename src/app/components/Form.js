@@ -25,9 +25,11 @@ function Form() {
     );
     toEl.textContent = formatCurrency(rawAmount, toSelect.value);
   }
-
+// setText(text.toLowerCase())
   // when the page loads, this code runs!
   const optionsHTML = generateOptions(currencies)
+  // console.log(currencies)
+  // console.log(optionsHTML)
   if (fromSelect != null) {
     fromSelect.innerHTML = optionsHTML;
   }

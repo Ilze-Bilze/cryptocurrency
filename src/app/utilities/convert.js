@@ -19,19 +19,19 @@ export const fetchRates = async () => {
   }
 }
 
-  export const convert = async (amount, from, to) => {
-    // first check if we even have the rates to convert from that currency
-    if (!ratesByBase[from]) {
-      console.log(
-        `Oh no, we dont have ${from} to convert to ${to}. So let's go get it!`,
-      );
-      const rates = await fetchRates(from);
-      // store them for next time
-      ratesByBase[from] = rates.data;
-    }
-    // convert that amount that they passed it
-    const rate = ratesByBase[from].rates[to]
-    const convertedAmount = rate * amount;
-    console.log(`${amount} ${from} is ${convertedAmount} in ${to}`);
-    return convertedAmount;
+export const convert = async (amount, from, to) => {
+  // first check if we even have the rates to convert from that currency
+  if (!ratesByBase[from]) {
+    console.log(
+      `Oh no, we dont have ${from} to convert to ${to}. So let's go get it!`,
+    );
+    const rates = await fetchRates(from);
+    // store them for next time
+    ratesByBase[from] = rates.data;
   }
+  // convert that amount that they passed it
+  const rate = ratesByBase[from].rates[to]
+  const convertedAmount = rate * amount;
+  console.log(`${amount} ${from} is ${convertedAmount} in ${to}`);
+  return convertedAmount;
+}
