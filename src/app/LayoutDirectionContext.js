@@ -22,7 +22,11 @@ export const LayoutDirectionProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("isRTL", isRTL.toString());
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem("isRTL", isRTL.toString())
+    } else {
+      console.log('Web Storage is not supported in this environment.')
+    }
   }, [isRTL]);
 
   useEffect(() => {
