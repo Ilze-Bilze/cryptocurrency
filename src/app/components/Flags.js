@@ -27,8 +27,11 @@ const Item = styled.li`
   padding-left: 5px;
   padding-right: 5px;
   line-height: 80px;
+  text-align: center;
   span {
     position: relative;
+    display: flex;
+    justify-content: center;
   }
   > ul {
     display: none;
@@ -46,8 +49,8 @@ const Item = styled.li`
       align-items: center;
       border-color: transparent;
       border-bottom: 2px;
-      margin-top: 5px;
-      margin-bottom: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
       button {
         &:hover {
           opacity: 0.6;

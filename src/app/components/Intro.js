@@ -2,7 +2,7 @@
 import { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Paragraphs from './Paragraphs'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 function Intro(props) {
   const { t } = useTranslation();
@@ -14,7 +14,7 @@ function Intro(props) {
     const titleString = titleRef.current
     const textContent = titleString.textContent.split(' ')
     const lastWords = textContent.splice(textContent.length - 3).join(' ')
-    const updatedContent = (textContent.length > 0 ? ` <span class='green-words'>${lastWords}</span>` : lastWords)
+    const updatedContent = (textContent.length > 0 ? ` <span style="color: #C2D6C1">${lastWords}</span>` : lastWords)
     titleString.innerHTML = textContent.join(' ') + updatedContent
   }, [])
 

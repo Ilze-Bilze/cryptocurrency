@@ -7,6 +7,7 @@ import Intro from './components/Intro';
 import { useTranslation } from 'react-i18next';
 import Form from './components/Form';
 import { Suspense } from 'react';
+import variables from './variables.module.scss'
 
 export default function Home() {
   const { t } = useTranslation();
