@@ -1,4 +1,5 @@
 const ratesByBase = {}
+console.log(ratesByBase)
 
 export const fetchRates = async () => {
   // imitate delay
@@ -7,6 +8,7 @@ export const fetchRates = async () => {
     const res = await fetch(
       `https://api.coinbase.com/v2/exchange-rates?currency=EUR`
     );
+    console.log(res)
     if (!res.ok) {
       throw new Error(`HTTP error: Status ${res.status}`);
     }
@@ -21,14 +23,14 @@ export const fetchRates = async () => {
     // first check if we even have the rates to convert from that currency
     if (!ratesByBase[from]) {
       console.log(
-        `Oh no, we dont have ${from} to convert to ${to}. So gets go get it!`,
+        `Oh no, we dont have ${from} to convert to ${to}. So let's go get it!`,
       );
       const rates = await fetchRates(from);
       // store them for next time
-      ratesByBase[from] = rates;
+      ratesByBase[from] = rates.data;
     }
     // convert that amount that they passed it
-    const rate = ratesByBase[from].rates[to];
+    const rate = ratesByBase[from].rates[to]
     const convertedAmount = rate * amount;
     console.log(`${amount} ${from} is ${convertedAmount} in ${to}`);
     return convertedAmount;

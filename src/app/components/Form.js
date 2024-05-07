@@ -19,7 +19,7 @@ function Form() {
 
   const handleInput = async (e) => {
     const rawAmount = await convert(
-      fromInput.value,
+      fromInputRef.current.value,
       fromSelect.value,
       toSelect.value,
     );
@@ -36,7 +36,7 @@ function Form() {
   }
 
   return (
-    <form className="border" onChange={handleInput}>
+    <form className="border" onInput={handleInput}>
       <input type="number" name="from_amount" ref={fromInputRef} />
       <select name="from_currency" ref={fromSelectRef}>
         <option>Select a Currency</option>
