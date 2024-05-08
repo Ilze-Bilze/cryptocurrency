@@ -9,8 +9,6 @@ import { useTranslation } from 'react-i18next';
 import Form from './components/Form';
 import { Suspense } from 'react';
 import ToggleRTL from './components/ToggleRTL'
-import Image from 'next/image';
-import adaIcon from './assets/cryptoicons/eur.svg'
 
 export default function Home() {
   const { t } = useTranslation();
@@ -22,7 +20,6 @@ export default function Home() {
       <main className="m-auto flex min-h-screen flex-col items-center justify-between p-24">
         <div className="w-full">
           <ToggleRTL />
-          <Image src={adaIcon} alt="svg icon" width="50" height="50" />
           <Intro title={t(about.header)} />
           <Suspense fallback={<Loading />}>
             <Form />

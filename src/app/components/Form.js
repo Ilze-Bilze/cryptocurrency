@@ -5,6 +5,7 @@ import Input from './Input'
 import Select from './Select'
 import { generateOptions, formatCurrency } from '../utilities/utils.js'
 import { convert } from '../utilities/convert'
+import SVG from './SvgComponent'
 
 function Form() {
   const fromSelectRef = useRef(null)
@@ -23,6 +24,7 @@ function Form() {
       fromSelect.value,
       toSelect.value,
     );
+    console.log(rawAmount)
     toEl.textContent = formatCurrency(rawAmount, toSelect.value);
   }
 // setText(text.toLowerCase())
@@ -48,7 +50,7 @@ function Form() {
         <option>Select a Currency</option>
       </select>
       <p>is</p>
-      <p className="to_amount" ref={toElRef}>$0</p>
+      <p className="to_amount" ref={toElRef}><SVG />$0</p>
     </form>
   )
 }

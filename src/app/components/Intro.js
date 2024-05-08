@@ -3,6 +3,8 @@ import { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Paragraphs from './Paragraphs'
 import { useTranslation } from 'react-i18next'
+import Image from 'next/image';
+import adaIcon from '../assets/cryptoicons/eur.svg'
 
 function Intro(props) {
   const { t } = useTranslation();
@@ -24,7 +26,7 @@ function Intro(props) {
       <div className="flex w-full justify-between gap-x-14 mb-5">
       {/* Line */}
         <div className="relative flex justify-center items-center w-[36%] md:flex hidden">
-          <span className="bg-main w-full h-[1px]"></span>
+          <Image src={adaIcon} alt="svg icon" width="50" height="50" />
         </div>
       {/* Text paragrahs */}
         <div className="relative w-full md:w-[64%] text-[20px] leading-relaxed">
