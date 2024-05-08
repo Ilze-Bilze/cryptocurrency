@@ -1,4 +1,5 @@
 import React from "react"
+import variables from '../variables.module.scss'
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -21,15 +22,17 @@ class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return (
-        <div>
+        <main className="m-auto flex min-h-screen flex-col items-center justify-between p-24">
           <h2>Oops, there is an error!</h2>
           <button
+            style={{ backgroundColor: variables.primaryColor }}
+            className='rounded-full py-2.5 px-3.5'
             type="button"
             onClick={() => this.setState({ hasError: false })}
           >
             Try again?
           </button>
-        </div>
+        </main>
       )
     }
  

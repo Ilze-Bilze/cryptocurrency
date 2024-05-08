@@ -3,7 +3,8 @@ import eurIcon from '../assets/cryptoicons/eur.svg'
 import { formatCurrency } from '../utilities/utils'
 
 function SVG() {
-  // const imgName = currency.toLowerCase()
+  // const imgName = formatCurrency(currency.toLowerCase())
+  // console.log(imgName)
   const imgSrc = '../assets/cryptoicons/eur.svg'
   console.log(imgSrc)
   return (
